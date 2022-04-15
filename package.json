@@ -1,0 +1,19 @@
+{
+  "name": "coin_frontend",
+  "version": "1.0.0",
+  "description": "frontend coin application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azemlyankin10/coin_app.git"
+  },
+  "author": "Andrey Zemlynkin <azemlyankin10@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/azemlyankin10/coin_app/issues"
+  },
+  "homepage": "https://github.com/azemlyankin10/coin_app#readme"
+}
