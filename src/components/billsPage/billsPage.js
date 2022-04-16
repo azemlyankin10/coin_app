@@ -1,11 +1,11 @@
 import Choices from "choices.js";
-import { el, mount } from "redom";
+import { el, mount, setChildren } from "redom";
+import router, { URL } from "../../..";
 import BaseComponent from "../BaseComponent";
 
 export default class BillsPage extends BaseComponent {
-  constructor(data) {
+  constructor() {
     super()
-    this.data = data
   }
 
   card(number, sum, lastTransaction) {
@@ -23,23 +23,30 @@ export default class BillsPage extends BaseComponent {
     return card
   }
 
-  gridCards() {
+  gridCards(data) {
     const container = el('div', {class: 'grid-card-bills'})
-    mount(container, this.card('123456788932021', '3 523 ₽', '21 августа 2021'))
-
-    mount(container, this.card('123456788932021', '3 523 ₽', '21 августа 2021'))
-
-    mount(container, this.card('123456788932021', '3 523 ₽', '21 августа 2021'))
-
-    mount(container, this.card('123456788932021', '3 523 ₽', '21 августа 2021'))
-
-    mount(container, this.card('123456788932021', '3 523 ₽', '21 августа 2021'))
-
-
+    setChildren(container, [
+      data.map(el => {
+        const { account, balance, transactions } = el
+        const lastTransaction = this.getCorrectDate(transactions[transactions.length - 1].date)
+        return this.card(account, `${balance} ₽`, lastTransaction)
+      })
+    ])
     return container
   }
 
-  render() {
+  async render() {
+    if(!this.key) return router.navigate('/auth')
+
+    const data = this.payload.length < 0
+    ? this.payload
+    : await this.getData(`${URL}/accounts`, this.key)
+            .then(res => {
+              this.payload = res.payload
+              if(res.error) throw TypeError = res.error
+              else return res.payload
+            })
+
     let domSelect
     const page = el('section', {class: 'section-bills'},
       el('div', {class: 'container section-bills__container'}, [
@@ -58,7 +65,7 @@ export default class BillsPage extends BaseComponent {
             'Создать новый счёт'
           ])
         ]),
-        this.gridCards()
+        this.gridCards(data)
       ])
     )
 
@@ -68,13 +75,6 @@ export default class BillsPage extends BaseComponent {
       allowHTML: true
     })
 
-    // console.log(this.getData('http://localhost:3000/accounts', 'ZGV2ZWxvcGVyOnNraWxsYm94'));
-    console.log(this.getKey('http://localhost:3000/login', {
-      login: "developer",
-      password: "skillbox"
-    }));
-
-// console.log(this.a());
     return page
   }
 }

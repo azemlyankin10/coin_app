@@ -16,6 +16,7 @@
   "author": "Andrey Zemlynkin <azemlyankin10@gmail.com>",
   "devDependencies": {
     "@babel/core": "^7.17.9",
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@squoosh/lib": "^0.4.0",
     "babel-loader": "^8.2.4",
@@ -38,8 +39,10 @@
     "webpack-dev-server": "^4.8.1"
   },
   "dependencies": {
+    "@babel/runtime": "^7.17.9",
     "choices.js": "^10.1.0",
     "cleave.js": "^1.6.0",
+    "just-validate": "^3.5.1",
     "navigo": "^8.11.1",
     "redom": "^3.27.1",
     "serve": "^13.0.2"

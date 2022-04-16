@@ -15,6 +15,7 @@
 		}
 
 		&__input-container {
+      position: relative;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -24,6 +25,13 @@
       }
       &:last-child {
         margin-bottom: 30px;
+      }
+
+      .just-validate-error-label {
+        position: absolute;
+        font-size: 12px;
+        bottom: -17px;
+        left: 80px;
       }
 		}
 

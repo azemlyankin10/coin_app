@@ -7,15 +7,19 @@ import BillsPage from './src/components/billsPage/billsPage';
 
 import './index.scss'
 
+export const URL = 'http://localhost:3000'
+
+const router = new Navigo("/");
+
+
 window.addEventListener("load", () => {
   const app = document.querySelector('.app')
-  const router = new Navigo("/");
 
   router
-    .on("/", () => {
+    .on("/", async () => {
       app.innerHTML = ''
       app.append(new Header(true).createHeader())
-      app.append(new BillsPage().render())
+      app.append(await new BillsPage().render())
     })
     .on("/auth", () => {
       app.innerHTML = ''
@@ -30,3 +34,4 @@ window.addEventListener("load", () => {
 })
 
 
+export default router
