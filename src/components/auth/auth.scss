@@ -1,0 +1,36 @@
+.auth {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-auth {
+  width: 500px;
+  background-color: $gray_7;
+  border-radius: 50px;
+  padding: 50px;
+		&__title {
+      margin-bottom: 35px;
+      text-align: center;
+		}
+
+		&__input-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 25px;
+      &:not(:last-child) {
+        margin-bottom: 25px;
+      }
+      &:last-child {
+        margin-bottom: 30px;
+      }
+		}
+
+		&__btn {
+      margin-left: 75px;
+      background-color: $primary;
+      border: none;
+      color: $white;
+    }
+}

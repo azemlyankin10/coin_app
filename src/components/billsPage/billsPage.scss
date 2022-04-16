@@ -1,0 +1,101 @@
+
+.section-bills {
+
+  &__container {
+  }
+}
+
+.form-bills {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {
+    margin-right: 35px;
+  }
+
+  &__btn {
+    position: relative;
+    padding-left: 55px;
+    background-color: $primary;
+    border: none;
+    color: $white;
+  }
+
+  &__btn-icon::before {
+    content: '\e906';
+    font-family: 'icomoon' !important;
+    position: absolute;
+    left: 20px;
+    top: 42%;
+    transform: rotate(45deg) translateY(-50%);
+    font-size: 14px;
+  }
+}
+.select {
+}
+
+.btn--normal {
+}
+.icon-close {
+}
+.grid-card-bills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  justify-content: space-between;
+  gap: 50px 70px;
+  &__card {
+  }
+}
+.bills-card {
+  // max-width: 400px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 9px;
+  background-color: $white;
+  padding: 22px;
+
+  &__title {
+    margin-bottom: 9px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: $secondary_1;
+  }
+
+  &__subtitle {
+    margin-bottom: 9px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: $secondary_1;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__footer-title {
+    align-self: flex-end;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 15px;
+    color: $black;
+  }
+
+  &__footer-subtitle {
+    display: block;
+    font-weight: 400;
+  }
+
+  &__btn {
+    background-color: $primary;
+    border: none;
+    color: $white;
+  }
+}

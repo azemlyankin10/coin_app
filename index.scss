@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('icon-font/fonts/icomoon.eot?nmf6qq');
+  src:  url('icon-font/fonts/icomoon.eot?nmf6qq#iefix') format('embedded-opentype'),
+    url('icon-font/fonts/icomoon.ttf?nmf6qq') format('truetype'),
+    url('icon-font/fonts/icomoon.woff?nmf6qq') format('woff'),
+    url('icon-font/fonts/icomoon.svg?nmf6qq#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+@import './src/components/base-scss/optimize.scss';
+@import './src/components/base-scss/variables.scss';
+@import './src/components/base-scss/repeat-classes.scss';
+@import './src/components/base-scss/choices-style.scss';
+
+@import './src/components/header/header.scss';
+@import './src/components/auth/auth.scss';
+@import './src/components/billsPage/billsPage.scss';
