@@ -1,0 +1,119 @@
+.form-transaction {
+  background: $gray_7;
+  border-radius: 50px;
+  min-width: 606px;
+  padding: 25px 50px;
+  // @media(max-width: 1410px) {}
+  &__title {
+    margin-bottom: 25px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+  }
+
+  &__input-container {
+    position: relative;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .just-validate-error-label {
+      font-size: 12px;
+      color: $error !important;
+      position: absolute;
+      bottom: -15px;
+      right: 5px;
+    }
+  }
+
+
+
+  &__input-dropdown-list {
+    position: absolute;
+    top: 105%;
+    background-color: $white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid $gray_5;
+    border-radius: 7px;
+    z-index: 3;
+    justify-content: center;
+    flex-direction: column;
+    width: 300px;
+    filter: drop-shadow(0px 5px 20px rgba(0, 0, 0, 0.25));
+    display: none;
+  }
+
+  #dropbox-container.active {
+    .form-transaction__input-dropdown-list {
+      display: flex;
+    }
+
+    .form-transaction__input-dropdown-container::before {
+      transform: rotate(180deg) translateY(8px);
+    }
+  }
+
+  &__input-dropdown-container {
+    position: relative;
+    width: 300px;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 19px;
+      right: 23px;
+      border: 7px solid transparent; border-top: 7px solid $black;
+    }
+  }
+
+  &__input-dropdown-item {
+    // margin-bottom: 10px;
+  }
+
+  &__input {
+    padding-right: 45px;
+  }
+
+  &__input-dropdown-button {
+    border: none;
+    background: transparent;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    color: $gray_2;
+    width: 100%;
+    text-align: left;
+    padding: 10px 16px;
+    overflow: hidden;
+
+    @media(hover:hover) {
+      &:hover {
+        background-color: #A0C3FF;
+      }
+    }
+  }
+
+  &__label {
+    margin-right: 18px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.01em;
+    color: $secondary_1;
+  }
+
+  &__btn {
+    border: none;
+    background-color: $primary;
+    color: $white;
+    margin-left: 205px;
+    &::before {
+      content: "\e90d";
+      font-family: 'icomoon' !important;
+      font-size: 20px;
+      margin-right: 12px;
+    }
+  }
+}

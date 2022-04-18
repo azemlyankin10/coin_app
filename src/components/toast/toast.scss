@@ -6,16 +6,43 @@
 
 .toast {
   margin-bottom: 10px;
-  border: 1px solid $error;
   border-radius: 8px;
   width: 400px;
   padding: 12px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(186, 0, 0, 0.1);
   z-index: 10;
   animation: slide-tl 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+  &.error {
+    background-color: rgba(186, 0, 0, 0.1);
+    border: 1px solid $error;
+
+    .toast__close {
+      &::before {
+        color: $error;
+      }
+    }
+
+    .toast__content {
+      color: $error;
+    }
+  }
+  &.success {
+    background-color: rgba(118, 202, 102, .1);
+    border: 1px solid $success;
+
+    .toast__close {
+      &::before {
+        color: $success;
+      }
+    }
+
+    .toast__content {
+      color: $success;
+    }
+  }
 
   &__close {
     border: none;
@@ -23,13 +50,9 @@
     &::before {
       content: "\e906";
       font-family: 'icomoon' !important;
-      color: $error;
     }
   }
 
-  &__content {
-    color: $error;
-  }
 }
 
 @keyframes slide-tl {

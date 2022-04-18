@@ -1,0 +1,88 @@
+.bill-detail-page {
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+
+  &__head-left {
+
+  }
+
+  &__title {
+    margin-bottom: 30px;
+    color: $black;
+  }
+
+  &__bill-number {
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 40px;
+    letter-spacing: -0.02em;
+    color: $black;
+  }
+
+  &__head-right {
+    text-align: right;
+  }
+
+  &__btn {
+    margin-bottom: 33px;
+    position: relative;
+    background-color: $primary;
+    color: $white;
+    border: none;
+    padding-left: 50px;
+  }
+
+  &__btn-icon::before {
+    content: "\e900";
+    position: absolute;
+    left: 20px;
+    top: 46%;
+    font-family: 'icomoon' !important;
+    transform: rotate(90deg) translateX(-50%);
+  }
+
+  &__total-container {
+
+  }
+
+  &__total-title {
+    margin-right: 50px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: -0.02em;
+    color: $black;
+  }
+
+  &__total {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: -0.02em;
+    color: $black;
+  }
+
+  &__main-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .form-transaction {
+    margin-right: 15px;
+    margin-bottom: 50px;
+  }
+
+  .graph {
+    @include adaptiv-value(width, 30%, 1%, 1);
+    margin-bottom: 50px;
+    @media(max-width: 1342px) {
+      width: 100%;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 .container {
-  max-width: $primary;
+  max-width: $maxWidthContainer;
   padding-left: 50px;
   padding-right: 50px;
   margin: 0 auto;
@@ -7,6 +7,13 @@
     padding-left: 25px;
     padding-right: 25px;
   }
+}
+
+.title {
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 40px;
+  color: $black;
 }
 
 .btn {
@@ -74,12 +81,12 @@
 
 .form {
 
-  &__title {
-    font-weight: 700;
-    font-size: 34px;
-    line-height: 40px;
-    color: $black;
-  }
+  // &__title {
+  //   font-weight: 700;
+  //   font-size: 34px;
+  //   line-height: 40px;
+  //   color: $black;
+  // }
 
   &__lable {
     font-weight: 500;

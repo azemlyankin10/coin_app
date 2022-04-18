@@ -10,12 +10,18 @@
   font-display: block;
 }
 
+@import './src/components/base-scss/mixins.scss';
 @import './src/components/base-scss/optimize.scss';
 @import './src/components/base-scss/variables.scss';
 @import './src/components/base-scss/repeat-classes.scss';
 @import './src/components/base-scss/choices-style.scss';
 @import './src/components/toast/toast.scss';
+@import './src/components/newTransaction/newTransaction.scss';
+@import './src/components/graph/graph.scss';
+@import './src/components/historyTransactions.js/historyTransactions.scss';
+
 
 @import './src/components/header/header.scss';
 @import './src/components/auth/auth.scss';
 @import './src/components/billsPage/billsPage.scss';
+@import './src/components/billDetailPage/billDetailPage.scss';

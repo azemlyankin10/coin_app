@@ -1,37 +1,42 @@
+
+import './index.scss'
 import Navigo from 'navigo';
+import { mount } from 'redom';
 
 import Auth from './src/components/auth/auth';
 import Header from "./src/components/header/header";
 import BillsPage from './src/components/billsPage/billsPage';
 
 
-import './index.scss'
+import BillDetailPage from './src/components/billDetailPage/billDetailPage';
 
 export const URL = 'http://localhost:3000'
 
-const router = new Navigo("/");
+const app = document.querySelector('.app')
+
+export const router = new Navigo("/");
+
+router
+  .on("/", async () => {
+    app.innerHTML = ''
+    mount(app, new Header(true).createHeader())
+    mount(app, await new BillsPage().render())
+  })
+  .on("/auth", () => {
+
+    app.innerHTML = ''
+    mount(app, new Header().createHeader())
+    mount(app, new Auth().form)
+  })
+  .on('/detail?:id', async (data) => {
+    app.innerHTML = ''
+    mount(app, new Header(true).createHeader())
+    mount(app, await new BillDetailPage(data.params.id).render())
+  })
+  .resolve();
 
 
-window.addEventListener("load", () => {
-  const app = document.querySelector('.app')
-
-  router
-    .on("/", async () => {
-      app.innerHTML = ''
-      app.append(new Header(true).createHeader())
-      app.append(await new BillsPage().render())
-    })
-    .on("/auth", () => {
-      app.innerHTML = ''
-      app.append(new Header().createHeader())
-      app.append(new Auth().form)
-    })
-
-    .resolve();
 
 
 
-})
 
-
-export default router

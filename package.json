@@ -40,11 +40,11 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
+    "chart.js": "^3.7.1",
     "choices.js": "^10.1.0",
     "cleave.js": "^1.6.0",
     "just-validate": "^3.5.1",
     "navigo": "^8.11.1",
-    "redom": "^3.27.1",
-    "serve": "^13.0.2"
+    "redom": "^3.27.1"
   }
 }

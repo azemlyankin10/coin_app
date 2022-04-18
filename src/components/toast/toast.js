@@ -1,8 +1,8 @@
 import { el, mount } from "redom"
 
-const toast = (text) => {
+const toast = (text, status) => {
   const closeBtn = el('button', {type: 'button', class: 'toast__close'})
-  const toast = el('div', {class: 'toast'}, [
+  const toast = el('div', {class: `toast ${status}`}, [
     el('p', {class: 'toast__content'}, text),
     closeBtn
   ])
