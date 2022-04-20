@@ -12,8 +12,15 @@
     border-radius: 20px;
     color: $gray_2;
   }
+  tr:not(:first-child) {
+    border-bottom: 2px solid rgba(0, 82, 255, 0.1);
+  }
   th {
-    padding: 21px 0 21px 50px;
+    padding-left: 30px;
+    padding-right: 10px;
+    // padding: 21px 0 21px 50px;
+    padding-top: 21px;
+    padding-bottom: 21px;
     background: $primary;
     color: $white;
     font-weight: 500;
@@ -29,10 +36,59 @@
     border-bottom-right-radius: 15px;
   }
   td {
-    border-bottom: 2px solid rgba(0, 82, 255, 0.1);
-    padding: 21px 0 21px 50px;
-    width: 10px;
+    // border-bottom: 2px solid rgba(0, 82, 255, 0.1);
+    // padding: 21px 0 21px 50px;
+    padding-left: 30px;
+    padding-right: 10px;
+    padding-top: 21px;
+    padding-bottom: 21px;
+    min-width: 10px;
     background: $gray_7;
+  }
+
+  @media(max-width: 996px) {
+    padding: 35px 30px;
+
+    th {
+      font-size: 14px;
+      padding-left: 20px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    td {
+      font-size: 10px;
+      padding-left: 20px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+  }
+
+  @media(max-width: 640px) {
+    background-color: $white;
+    padding: 0;
+
+    tr:first-child {
+      border-bottom: 2px solid rgba(0, 82, 255, 0.1);
+    }
+
+    th {
+      font-size: 10px;
+      padding-left: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background: transparent;
+      color: $black;
+      font-weight: 700;
+    }
+
+    td {
+      font-size: 6px;
+      background: transparent;
+      padding-left: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
   }
 
 }

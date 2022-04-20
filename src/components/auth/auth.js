@@ -3,12 +3,13 @@ import JustValidate from 'just-validate';
 import { router } from "../../../";
 import BaseComponent from "../BaseComponent";
 import toast from "../toast/toast";
+import Loaders from "../loaders-skeleton/loaders";
 
 const SESSION_STORAGE = 'coin_key'
 
 export default class Auth extends BaseComponent {
 
-  get form() {
+  form() {
     const auth = el('div', {class: 'auth'})
     const form = el('form', {class: 'form-auth form'}, [
       el('h2', {class: 'form__title form-auth__title'}, 'Вход в аккаунт'),
@@ -22,22 +23,7 @@ export default class Auth extends BaseComponent {
       ]),
       el('button', {class: 'btn form__btn form-auth__btn btn--normal'}, 'Войти')
     ])
-    form.addEventListener('submit', (e) => {
-      e.preventDefault()
-      const login = e.target.elements.login.value
-      const password = e.target.elements.password.value
-      this.getKey({ login, password })
-        .then(res => {
-          const { error, payload } = res
-          if(!error && payload) {
-            this.key = payload.token
-            sessionStorage.setItem(SESSION_STORAGE, payload.token)
-            router.navigate('/')
-          } else {
-            toast(error, 'error')
-          }
-        })
-    })
+
 
     const validation = new JustValidate(form);
     validation
@@ -73,7 +59,29 @@ export default class Auth extends BaseComponent {
           errorMessage: 'Пароль должен содержать максимум 12 символов'
         },
       ])
+      .onSuccess(async e => {
+        const loader = new Loaders()
+        loader.authLoader()
+        const login = e.target.elements.login.value
+        const password = e.target.elements.password.value
+        setTimeout(async () => {  //timeout
 
+          await this.getKey({ login, password })
+          .then(res => {
+            const { error, payload } = res
+            if(!error && payload) {
+              this.key = payload.token
+              sessionStorage.setItem(SESSION_STORAGE, payload.token)
+              router.navigate('/bills')
+            } else {
+              toast(error, 'error')
+            }
+          })
+          loader.remove()
+
+
+        }, 1000)
+      })
 
     mount(auth, form)
     return auth

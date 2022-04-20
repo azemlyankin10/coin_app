@@ -1,4 +1,5 @@
 import { URL } from "../.."
+import toast from "./toast/toast"
 
 export default class BaseComponent {
   constructor() {
@@ -6,14 +7,20 @@ export default class BaseComponent {
     this.payload = []
   }
 
-  getKey(objLoginData) {
-    return fetch(`${URL}/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(objLoginData)
-    }).then(res => res.json())
+  async getKey(objLoginData) {
+    try {
+      const res = await fetch(`${URL}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(objLoginData)
+      })
+      return await res.json()
+    } catch (error) {
+      toast(error.message, 'error')
+    }
+
 
   }
 
@@ -37,6 +44,17 @@ export default class BaseComponent {
     }).then(res => res.json())
   }
 
+  transfer(objData, key) {
+    return fetch(`${URL}/transfer-funds`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Basic ${key}`
+      },
+      body: JSON.stringify(objData)
+    }).then(res => res.json())
+  }
+
   getCorrectDate(date) {
     const monthName = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
     date = new Date(date)
@@ -47,28 +65,45 @@ export default class BaseComponent {
   }
 
   getSortBills(data) {
-    const step1 = data.filter(el => {
+    const transactionsArray = data.transactions
+    //получает массив транзакций за 6 мес.
+    const step1 = transactionsArray.filter(el => {
       const ms = new Date() - 86400000 * 30 * 6
       const date = new Date(ms).setDate(1)
       if(date < new Date(el.date)) return el
     })
 
+    //получаем отсортированный массив помесячно
     const step2 = []
     let subArray = []
-    for(let i = 0; i < step1.length - 1; i++) {
-      if(step1[i] === step1[step1.length - 2] && subArray.length > 0) step2.push(subArray)
-      let x = new Date(step1[i].date).getMonth()
-      let y = new Date(step1[i + 1].date).getMonth()
-      if(x === y) subArray.push(step1[i])
-      else {
-        step2.push(subArray)
-        subArray = []
+    if(step1.length === 1) step2.push([step1[0]])
+    else {
+      for(let i = 1; i < step1.length; i++) {
+        const x = new Date(step1[i - 1].date).getMonth()
+        const y = new Date(step1[i].date).getMonth()
+        if(i === step1.length - 1) {
+          if(x !== y) step2.push([step1[i]])
+          else if(x === y) {
+            subArray.push(step1[i])
+            step2.push(subArray)
+          }
+        }
+        if(x === y) subArray.push(step1[i - 1])
+        else {
+          if(subArray.length === 0) subArray.push(step1[i - 1])
+          step2.push(subArray)
+          subArray = []
+        }
       }
     }
 
+    // считаем сумму каждого месяца
     const currentSum = step2.map(el => {
-      const count =  el.reduce((accum, currentValue) => {
-        return accum + Number(currentValue.amount)
+      const count = el.reduce((accum, currentValue) => {
+        let result = data.account === currentValue.from
+                    ? accum - Number(currentValue.amount)
+                    : accum + Number(currentValue.amount)
+        return result
       }, 0)
       return Math.round(count)
     })

@@ -1,0 +1,96 @@
+.popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.363);
+  z-index: 9;
+  padding: 20px;
+  // display: flex;
+  // justify-content: center;
+
+  &__container {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 22px;
+    max-width: 500px;
+    height: 188px;
+    background: #FFFFFF;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 9px;
+    animation: modal .3s ease-in-out alternate;;
+    @media(max-width: 768px) {
+      margin-top: 25%;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 11px;
+  }
+
+  &__title {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.01em;
+    color: $secondary_1;
+  }
+
+  &__btn-close {
+    background-color: transparent;
+    border: none;
+    &::before {
+      content: "\e906";
+      font-family: 'icomoon' !important;
+      color: $secondary_1;
+    }
+  }
+
+  &__text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: $secondary_1;
+    margin-bottom: 20px;
+  }
+
+  &__footer {
+    display: flex;
+    // justify-content: space-between;
+
+  }
+
+  &__footer-btn {
+    border: none;
+    color: $white;
+    &:first-child {
+      margin-right: 9px;
+    }
+  }
+
+  &__footer-btn--cancel {
+    background-color: $gray_4;
+  }
+
+  &__footer-btn--ok {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    background-color: $primary;
+  }
+}
+
+@keyframes modal {
+  0%{
+    transform: translateY(-100%);
+  }
+  100%{
+    transform: translateY(0);
+  }
+}

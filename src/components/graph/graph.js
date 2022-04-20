@@ -83,7 +83,10 @@ const graphComponent = (data) => {
             font: {
               size: '20'
             },
-          }
+            callback: (value, index, values) => index > 0 && index < values.length - 1
+              ? ''
+              : Math[index ? 'max' : 'min'](...values.map(n => n.value)),
+          },
         },
         x: {
           grid: {
@@ -111,14 +114,14 @@ const graphComponent = (data) => {
     plugins: [
       {
         beforeDraw(chart, args, options) {
-          const {ctx, chartArea: {left, top, width, height}} = chart;
-          ctx.save();
-          ctx.strokeStyle = options.borderColor;
-          ctx.lineWidth = 1;
-          ctx.setLineDash(options.borderDash || []);
-          ctx.lineDashOffset = options.borderDashOffset;
-          ctx.strokeRect(left, top, width, height);
-          ctx.restore();
+          const {ctx, chartArea: {left, top, width, height}} = chart
+          ctx.save()
+          ctx.strokeStyle = options.borderColor
+          ctx.lineWidth = 1
+          ctx.setLineDash(options.borderDash || [])
+          ctx.lineDashOffset = options.borderDashOffset
+          ctx.strokeRect(left, top, width, height)
+          ctx.restore()
         }
       }
     ]

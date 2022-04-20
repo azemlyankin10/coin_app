@@ -19,12 +19,32 @@
     margin-right: 35px;
   }
 
+  @media(max-width: 870px) {
+    align-items: end;
+    &__container {
+      flex-wrap: wrap;
+    }
+    &__title {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+
+  @media(max-width: 585px) {
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+    &__container {
+      margin-bottom: 15px;
+    }
+  }
+
   &__btn {
     position: relative;
     padding-left: 55px;
     background-color: $primary;
     border: none;
     color: $white;
+    min-width: 225px;
   }
 
   &__btn-icon::before {
@@ -46,10 +66,12 @@
 }
 .grid-card-bills {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   justify-content: space-between;
   gap: 50px 70px;
-  &__card {
+
+  @media(max-width: 1200px) {
+    gap: 25px;
   }
 }
 .bills-card {
@@ -58,6 +80,9 @@
   border-radius: 9px;
   background-color: $white;
   padding: 22px;
+  @media(max-width: 1200px) {
+    max-width: none;
+  }
 
   &__title {
     margin-bottom: 9px;
@@ -84,6 +109,9 @@
     align-self: flex-end;
     font-weight: 700;
     font-size: 13px;
+    @media(max-width: 500px) {
+      font-size: 11px;
+    }
     line-height: 15px;
     color: $black;
   }

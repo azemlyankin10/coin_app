@@ -7,6 +7,9 @@
   padding-top: 25px;
   padding-bottom: 25px;
   margin-bottom: 44px;
+  @media(max-width: 500px) {
+    margin-bottom: 25px;
+  }
 
   &__container {
     display: flex;
@@ -25,6 +28,7 @@
     display: flex;
     flex-wrap: wrap;
     @media(max-width: 768px) {
+      padding: 0 25px 25px 25px;
       position: absolute;
       left: 0;
       top: 100%;
@@ -33,7 +37,11 @@
       background-color: $primary;
       transform: translateX(-100%);
       opacity: .5;
+      z-index: 9;
       transition: transform .3s ease-in-out, opacity .3s ease-in-out;
+    }
+    @media(max-width: 500px) {
+      padding: 0 10px 25px 10px;
     }
   }
 
@@ -45,6 +53,7 @@
       }
       @media(max-width: 768px) {
         margin-right: 0;
+        margin-bottom: 10px;
       }
     }
     border: 2px solid $primary;

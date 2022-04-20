@@ -2,6 +2,7 @@ import Choices from "choices.js";
 import { el, mount, setChildren } from "redom";
 import { router } from "../../..";
 import BaseComponent from "../BaseComponent";
+import popup from "../popup/popup";
 import toast from "../toast/toast";
 
 const LINK_FOR_DETAIL_PAGE = '/detail'
@@ -17,7 +18,7 @@ export default class BillsPage extends BaseComponent {
       el('span', {class: 'bills-card__subtitle'}, sum),
       el('div', {class: 'bills-card__footer'}, [
         el('p', {class: 'bills-card__footer-title'}, [
-          lastTransaction ? 'Последняя транзакция:' : 'Транзакций не совершалось',
+          lastTransaction ? 'Последняя транзакция:' : '',
           el('span', {class: 'bills-card__footer-subtitle'}, lastTransaction)
         ]),
         el('a', {href: `${LINK_FOR_DETAIL_PAGE}?id=${number}`, 'data-navigo': '', class: 'btn bills-card__btn btn--normal'}, 'Открыть')
@@ -32,7 +33,7 @@ export default class BillsPage extends BaseComponent {
       data.map(el => {
         const { account, balance, transactions } = el
         const lastTransaction = transactions.length > 0 ? this.getCorrectDate(transactions[0].date) : false
-        return this.card(account, `${balance} ₽`, lastTransaction)
+        return this.card(account, `${balance.toFixed(2)} ₽`, lastTransaction)
       })
     ])
 
@@ -52,7 +53,6 @@ export default class BillsPage extends BaseComponent {
               else return res.payload
             })
 
-    toast('Авторизация пройшла успешно', 'success')
 
     const domSelect = el('select', {class: 'form-bills__select'}, [
       el('option', {value: ''}, 'Сортировка'),
@@ -64,7 +64,8 @@ export default class BillsPage extends BaseComponent {
       el('span', {class: 'form-bills__btn-icon'}),
       'Создать новый счёт'
     ])
-    const page = el('main', {class: 'section-bills'},
+
+    const page = el('main', {class: 'main section-bills'},
       el('div', {class: 'container section-bills__container'}, [
         el('form', {class: 'form form-bills'}, [
           el('div', {class: 'form-bills__container'}, [
@@ -83,12 +84,45 @@ export default class BillsPage extends BaseComponent {
       allowHTML: true
     })
 
+    domSelect.addEventListener('change', e => {
+      let sortedData
+      switch (e.target.value) {
+        case 'number':
+          sortedData = data.sort((a, b) => a.account - b.account).reverse()
+          break
+        case 'bill':
+          sortedData = data.sort((a, b) => a.balance - b.balance).reverse()
+          break
+        case 'last':
+          sortedData = data.sort((a, b) => {
+            let one = a.transactions.length > 0
+                      ? new Date(a.transactions[a.transactions.length - 1].date)
+                      : new Date('01/01/1970')
+            let two = b.transactions.length > 0
+                      ? new Date(b.transactions[b.transactions.length - 1].date)
+                      : new Date('01/01/1970')
+            return one - two
+          }).reverse()
+          break
+      }
+      this.cardsContainer.innerHTML = ''
+      sortedData.map(elem => {
+        const { account, balance, transactions } = elem
+        const lastTransaction = transactions.length > 0 ? this.getCorrectDate(transactions[0].date) : false
+        return mount(this.cardsContainer, this.card(account, `${balance.toFixed(2)} ₽`, lastTransaction))
+      })
+
+    })
+
     createNewbillBtn.addEventListener('click', () => {
-      this.createNewBill(this.key).then(res => {
-        if(res.error) return toast(error, 'error')
-        const { account, balance } = res.payload
-        mount(this.cardsContainer, this.card(account, `${balance} ₽`, false))
-        toast('Баланс успешно создан', 'success')
+      const modal = popup('Подтвердите действие', 'Для создания нового счёта, нажмите "ОК"', () => {
+        this.createNewBill(this.key).then(res => {
+          if(res.error) return toast(error, 'error')
+          const { account, balance } = res.payload
+          mount(this.cardsContainer, this.card(account, `${balance.toFixed(2)} ₽`, false))
+          modal.remove()
+          toast('Баланс успешно создан', 'success')
+        })
       })
     })
 

@@ -1,9 +1,9 @@
 import { el } from "redom";
 
-const historyTransactionsComponent = (data) => {
+const historyTransactionsComponent = (account, data) => {
   const tableContainer = el('div', {class: 'table'}, [
     el('table', [
-      el('tr', [
+      el('tr', {class: 'table__header'}, [
         el('th', 'Счёт отправителя'),
         el('th', 'Счёт получателя'),
         el('th', 'Сумма'),
@@ -18,7 +18,11 @@ const historyTransactionsComponent = (data) => {
         return el('tr', [
                 el('td', element.from),
                 el('td', element.to),
-                el('td', {style: {color: `${element.amount > 0 ? '#76CA66' : '#FD4E5D'}`}}, `${element.amount > 0 ? '+' : ''} ${element.amount} ₽`),
+                el('td', {
+                    style: {color: `${element.from === account ? '#FD4E5D' : '#76CA66'}`}
+                  },
+                 `${element.from === account ? '-' : '+'} ${element.amount} ₽`
+                ),
                 el('td', `${day}.${month}.${year}`)
                ])
       })
