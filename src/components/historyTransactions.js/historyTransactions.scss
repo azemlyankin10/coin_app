@@ -1,8 +1,16 @@
 .table {
   background-color: $gray_7;
-  padding: 45px 40px;
+  padding: 40px;
   border-radius: 56px;
   width: 100%;
+
+  &__title {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: -0.02em;
+    margin-bottom: 25px;
+  }
 
   table {
     width: 100%;
@@ -18,7 +26,6 @@
   th {
     padding-left: 30px;
     padding-right: 10px;
-    // padding: 21px 0 21px 50px;
     padding-top: 21px;
     padding-bottom: 21px;
     background: $primary;
@@ -36,8 +43,6 @@
     border-bottom-right-radius: 15px;
   }
   td {
-    // border-bottom: 2px solid rgba(0, 82, 255, 0.1);
-    // padding: 21px 0 21px 50px;
     padding-left: 30px;
     padding-right: 10px;
     padding-top: 21px;

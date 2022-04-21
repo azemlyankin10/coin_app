@@ -121,8 +121,18 @@
       text-align: left;
     }
 
+    .form-transaction {
+      margin-right: 0;
+    }
+
     .graph {
-      min-width: none;
+      min-width: 300px;
+    }
+  }
+
+  @media(max-width: 600px) {
+    &__bill-number {
+      font-size: 18px;
     }
   }
 }

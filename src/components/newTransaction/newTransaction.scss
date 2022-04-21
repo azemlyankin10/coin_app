@@ -27,8 +27,6 @@
     }
   }
 
-
-
   &__input-dropdown-list {
     position: absolute;
     top: 105%;
@@ -114,6 +112,48 @@
       font-family: 'icomoon' !important;
       font-size: 20px;
       margin-right: 12px;
+    }
+  }
+
+  @media(max-width: 768px) {
+    min-width: 0;
+    width: 100%;
+
+    &__input-container {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      width: 100%;
+    }
+
+    &__input-dropdown-container {
+      width: 100%;
+    }
+
+    &__label {
+      flex-basis: 100%;
+    }
+
+    &__input {
+      max-width: none;
+    }
+
+    &__btn {
+      margin: 0 auto;
+    }
+  }
+
+  @media(max-width: 600px) {
+
+    padding: 0;
+    background-color: transparent;
+
+    &__input-dropdown-list {
+      width: 100%;
+    }
+
+    &__input-dropdown-button {
+      font-size: 12px;
+      line-height: 16px;
     }
   }
 }

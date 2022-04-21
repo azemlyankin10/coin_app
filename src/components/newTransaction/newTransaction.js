@@ -66,7 +66,7 @@ export default class TansactionComponent extends BaseComponent {
   form(callback) {
     const form = el('form', {class: 'form form-transaction'})
     const title = el('h2', {class: 'form__title form-transaction__title'}, 'Новый перевод')
-    const inputNumber = el('input', {type: 'number', id: 'billNumber', name: 'bill', autocomplete: 'off', class: 'form__input form-transaction__input', placeholder: 'Введите номер счета получателя'})
+    const inputNumber = el('input', {type: 'number', id: 'billNumber', name: 'bill', autocomplete: 'off', class: 'form__input form-transaction__input', placeholder: 'Введите номер счета'})
     this.inputNumber = inputNumber
     inputNumber.addEventListener('click', () => formNumberContainer.classList.add('active'))
     window.addEventListener('click', e => {
@@ -77,7 +77,7 @@ export default class TansactionComponent extends BaseComponent {
 
     const formNumberContainer = el('div', {class: 'form-transaction__input-container', id: 'dropbox-container'}, [
       el('label', {class: 'form__label form-transaction__label'}, 'Номер счёта получателя'),
-      el('div', {class: 'form-transaction__input-dropdown-container'}, [
+      el('div', {class: 'form-transaction__input-dropdown-container '}, [
         inputNumber,
         this.createDropdown()
       ])

@@ -2,11 +2,27 @@ import { el, mount, setChildren } from "redom";
 
 export default class Loaders {
 
+  headerLoader() {
+    const header = el('div', {class: 'loader__header'}, [
+      el('span', {class: 'loader__header-logo'}),
+      el('ul', {class: 'loader__header-buttons'}, [
+        el('li', {class: 'loader__header-btn'}),
+        el('li', {class: 'loader__header-btn'}),
+        el('li', {class: 'loader__header-btn'}),
+        el('li', {class: 'loader__header-btn'}),
+      ])
+    ])
+
+    return header
+  }
+
   remove() {
+    document.body.style.overflow = 'visible'
     this.loader.remove()
   }
 
   authLoader() {
+    document.body.style.overflow = 'hidden'
     const loader = el('div', {class: 'loader-skeleton container'},
       [
         el('div', {class: 'loader-skeleton__auth-container'},
@@ -19,16 +35,8 @@ export default class Loaders {
   }
 
   billsLoader() {
+    document.body.style.overflow = 'hidden'
     const loader = el('div', {class: 'bills-page-skeleton-loader container'})
-    const header = el('div', {class: 'bills-page-skeleton-loader__header'}, [
-      el('span', {class: 'bills-page-skeleton-loader__header-logo'}),
-      el('ul', {class: 'bills-page-skeleton-loader__header-buttons'}, [
-        el('li', {class: 'bills-page-skeleton-loader__header-btn'}),
-        el('li', {class: 'bills-page-skeleton-loader__header-btn'}),
-        el('li', {class: 'bills-page-skeleton-loader__header-btn'}),
-        el('li', {class: 'bills-page-skeleton-loader__header-btn'}),
-      ])
-    ])
     const main = el('div', {class: 'bills-page-skeleton-loader__main'})
     const form = el('div', {class: 'bills-page-skeleton-loader__main-form'}, [
       el('span', {class: 'bills-page-skeleton-loader__main-title'}),
@@ -45,11 +53,44 @@ export default class Loaders {
       mount(grid, card)
     }
     setChildren(main, [form, grid])
-    setChildren(loader, [header, main])
+    setChildren(loader, [this.headerLoader(), main])
 
     this.loader = loader
     return mount(document.querySelector('.app'), loader)
   }
 
+  billsDetailLoader() {
+    document.body.style.overflow = 'hidden'
+    const loader = el('div', {class: 'bil-deteil-loader container'})
+    const topSide = el('div', {class: 'bil-deteil-loader__top'}, [
+      el('div', {class: 'bil-deteil-loader__top-left'}),
+      el('div', {class: 'bil-deteil-loader__top-right'}),
+    ])
+    const main = el('div', {class: 'bil-deteil-loader__main'}, [
+      el('span', {class: 'bil-deteil-loader__main-1'}),
+      el('span', {class: 'bil-deteil-loader__main-2'}),
+      el('span', {class: 'bil-deteil-loader__main-3'}),
+    ])
+    setChildren(loader, [this.headerLoader(), topSide, main])
+    this.loader = loader
+    return mount(document.querySelector('.app'), loader)
+  }
+
+  billHistoryLoader() {
+    document.body.style.overflow = 'hidden'
+    const loader = el('div', {class: 'bil-history bil-deteil-loader container'})
+    const topSide = el('div', {class: 'bil-deteil-loader__top'}, [
+      el('div', {class: 'bil-deteil-loader__top-left'}),
+      el('div', {class: 'bil-deteil-loader__top-right'}),
+    ])
+    const main = el('div', {class: 'bil-deteil-loader__main'}, [
+      el('span', {class: 'bil-deteil-loader__main-1'}),
+      el('span', {class: 'bil-deteil-loader__main-2'}),
+      el('span', {class: 'bil-deteil-loader__main-3'}),
+    ])
+    setChildren(loader, [this.headerLoader(), topSide, main])
+    this.loader = loader
+    return mount(document.querySelector('.app'), loader)
+  }
 
 }

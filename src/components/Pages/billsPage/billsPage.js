@@ -1,9 +1,9 @@
 import Choices from "choices.js";
 import { el, mount, setChildren } from "redom";
-import { router } from "../../..";
-import BaseComponent from "../BaseComponent";
-import popup from "../popup/popup";
-import toast from "../toast/toast";
+import { router } from "../../../..";
+import BaseComponent from "../../BaseComponent";
+import popup from "../../popup/popup";
+import toast from "../../toast/toast";
 
 const LINK_FOR_DETAIL_PAGE = '/detail'
 

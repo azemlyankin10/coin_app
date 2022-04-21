@@ -1,8 +1,11 @@
 import { el } from "redom";
+import { router } from "../../..";
 
-const historyTransactionsComponent = (account, data) => {
+const historyTransactionsComponent = (account, data, click) => {
+  let table
   const tableContainer = el('div', {class: 'table'}, [
-    el('table', [
+    el('h2', {class: 'table__title'}, 'История переводов'),
+    table = el('table', [
       el('tr', {class: 'table__header'}, [
         el('th', 'Счёт отправителя'),
         el('th', 'Счёт получателя'),
@@ -28,6 +31,7 @@ const historyTransactionsComponent = (account, data) => {
       })
     ])
   ])
+  click ? table.addEventListener('click', () => router.navigate(`/history${location.search}`)) : null
   return tableContainer
 }
 

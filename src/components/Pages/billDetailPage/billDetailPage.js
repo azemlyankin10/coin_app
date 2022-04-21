@@ -1,12 +1,13 @@
 import { el, mount, setChildren } from "redom";
-import { router } from "../../..";
-import BaseComponent from "../BaseComponent";
-import graphComponent from "../graph/graph";
-import historyTransactionsComponent from "../historyTransactions.js/historyTransactions";
-import TansactionComponent, { LOCAL_STORAGE } from "../newTransaction/newTransaction";
-import popup from "../popup/popup";
-import toast from "../toast/toast";
+import { router } from "../../../..";
+import BaseComponent from "../../BaseComponent";
+import { balanceGraphComponent } from "../../graph/graph";
+import historyTransactionsComponent from "../../historyTransactions.js/historyTransactions";
+import TansactionComponent, { LOCAL_STORAGE } from "../../newTransaction/newTransaction";
+import popup from "../../popup/popup";
+import toast from "../../toast/toast";
 
+const MONTH = 6
 const transactionComponent = new TansactionComponent()
 export default class BillDetailPage extends BaseComponent {
   constructor(id) {
@@ -55,10 +56,10 @@ export default class BillDetailPage extends BaseComponent {
 
         balanceDom.textContent = newData.payload.balance.toFixed(2)
         this.graph.remove()
-        this.graph = graphComponent(this.getSortBills(newData.payload))
+        this.graph = balanceGraphComponent(this.getSortBills(newData.payload, MONTH), () => router.navigate(`/history${location.search}`))
         mount(billDetailPageMainContent, this.graph)
         this.dashboard.remove()
-        this.dashboard = historyTransactionsComponent(newData.payload.account, newData.payload.transactions)
+        this.dashboard = historyTransactionsComponent(newData.payload.account, newData.payload.transactions,true)
         mount(billDetailPageMainContent, this.graph)
         mount(billDetailPageMainContent, this.dashboard)
         toast('Транзакция пройшла успешно', 'success')
@@ -73,8 +74,8 @@ export default class BillDetailPage extends BaseComponent {
       })
     })
 
-    this.graph = graphComponent(this.getSortBills(data.payload))
-    this.dashboard = historyTransactionsComponent(data.payload.account, data.payload.transactions)
+    this.graph = balanceGraphComponent(this.getSortBills(data.payload, MONTH), () => router.navigate(`/history${location.search}`))
+    this.dashboard = historyTransactionsComponent(data.payload.account, data.payload.transactions, true)
     const billDetailPageMainContent = el('div', {class: 'bill-detail-page__main-content'}, [transactionForm, this.graph, this.dashboard])
 
     setChildren(billDetailPage, [

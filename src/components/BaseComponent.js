@@ -64,11 +64,11 @@ export default class BaseComponent {
     return `${day} ${month} ${year}`
   }
 
-  getSortBills(data) {
+  getSortBills(data, countMonth) {
     const transactionsArray = data.transactions
-    //получает массив транзакций за 6 мес.
+    //получает массив транзакций за countMonth мес.
     const step1 = transactionsArray.filter(el => {
-      const ms = new Date() - 86400000 * 30 * 6
+      const ms = new Date() - 86400000 * 30 * countMonth
       const date = new Date(ms).setDate(1)
       if(date < new Date(el.date)) return el
     })
@@ -108,14 +108,34 @@ export default class BaseComponent {
       return Math.round(count)
     })
 
+    const comeSum = step2.map(el => {
+      const count = el.reduce((accum, currentValue) => {
+        let result = data.account === currentValue.to
+                    ? accum + Number(currentValue.amount)
+                    : accum
+        return result
+      }, 0)
+      return Math.round(count)
+    })
+
+    const outSum = step2.map(el => {
+      const count = el.reduce((accum, currentValue) => {
+        let result = data.account === currentValue.from
+                    ? accum + Number(currentValue.amount)
+                    : accum
+        return result
+      }, 0)
+      return Math.round(count)
+    })
+
     const months = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек']
     const currentMonths = step2.map(el => {
       const index = new Date(el[0].date).getMonth()
+
       return months[index]
     })
 
 
-
-    return {currentSum, currentMonths}
+    return {comeSum, outSum, currentSum, currentMonths}
   }
 }

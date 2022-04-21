@@ -1,9 +1,9 @@
 import { el, mount } from "redom";
 import JustValidate from 'just-validate';
-import { router } from "../../../";
-import BaseComponent from "../BaseComponent";
-import toast from "../toast/toast";
-import Loaders from "../loaders-skeleton/loaders";
+import { router } from "../../../..";
+import BaseComponent from "../../BaseComponent";
+import toast from "../../toast/toast";
+import Loaders from "../../loaders-skeleton/loaders";
 
 const SESSION_STORAGE = 'coin_key'
 

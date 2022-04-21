@@ -16,7 +16,7 @@ export default class Header {
       ]),
       el('div', {class: 'nav__btn-group'}, [
         el('a', {class: 'btn nav__btn btn--outline'}, 'Банкоматы'),
-        el('a', {class: 'btn nav__btn btn--outline'}, 'Счета'),
+        el('a', {href: '/bills', class: `btn nav__btn btn--outline ${location.pathname === '/bills' ? 'active' : ''}`}, 'Счета'),
         el('a', {class: 'btn nav__btn btn--outline'}, 'Валюта'),
         el('a', {href: '/auth', 'data-navigo': '', class: 'btn nav__btn btn--outline'}, 'Выйти'),
       ])]

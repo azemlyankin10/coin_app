@@ -1,3 +1,60 @@
+.loader__header {
+  margin-bottom: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  width: 100%;
+  height: 100px;
+
+  &-logo {
+    display: block;
+    width: 100px;
+    height: 50px;
+    background-color: $white;
+    border-radius: 7px;
+  }
+
+  &-buttons {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    @media(max-width: 768px) {
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0px;
+        width: 50px;
+        height: 3px;
+        background-color: $white;
+      }
+      &::before {
+        transform: rotate(-45deg);
+      }
+      &::after {
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  &-btn {
+    width: 100px;
+    height: 40px;
+    background-color: $white;
+    // background: linear-gradient(179.67deg, #F3F4F6 13.59%, #F3F4F6 18.57%, #116ACC 143.31%);
+    // animation: background 6s infinite alternate;
+    border-radius: 7px;
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+    @media(max-width: 768px) {
+      display: none;
+    }
+  }
+}
+
 .loader-skeleton {
   position: absolute;
   top: 190px;
@@ -13,6 +70,7 @@
 
   &__auth-container {
     position: relative;
+    background: #F3F4F6;
     background: linear-gradient(179.67deg, #F3F4F6 13.59%, #F3F4F6 18.57%, #116ACC 143.31%);
     animation: background 2s infinite alternate;
     border-radius: 50px;
@@ -72,74 +130,12 @@
   right: 0;
   bottom: 0;
   left: 0;
-  // background-color: #212224d5;
   background: linear-gradient(119.67deg, #F3F4F6 1%, #F3F4F6 18.57%, #116ACC 500%);
   animation: background 2s infinite alternate;
   z-index: 9;
 
-  &__header {
-    margin-bottom: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 24px;
-    padding-bottom: 24px;
-    width: 100%;
-    height: 100px;
-    // box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
-  }
-
-  &__header-logo {
-    display: block;
-    width: 100px;
-    height: 50px;
-    background-color: $white;
-    border-radius: 7px;
-    // background: linear-gradient(179.67deg, #F3F4F6 13.59%, #F3F4F6 18.57%, #116ACC 143.31%);
-    // animation: background 6s infinite alternate;
-  }
-
-  &__header-buttons {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    @media(max-width: 768px) {
-      &::before,
-      &::after {
-        content: "";
-        position: absolute;
-        right: 0px;
-        width: 50px;
-        height: 3px;
-        background-color: $white;
-      }
-      &::before {
-        transform: rotate(-45deg);
-      }
-      &::after {
-        transform: rotate(45deg);
-      }
-    }
-  }
-
-  &__header-btn {
-    width: 100px;
-    height: 40px;
-    background-color: $white;
-    // background: linear-gradient(179.67deg, #F3F4F6 13.59%, #F3F4F6 18.57%, #116ACC 143.31%);
-    // animation: background 6s infinite alternate;
-    border-radius: 7px;
-    &:not(:last-child) {
-      margin-right: 15px;
-    }
-    @media(max-width: 768px) {
-      display: none;
-    }
-  }
-
   &__main-form {
     display: flex;
-    // justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
 
@@ -150,8 +146,6 @@
   &__main-btn {
     display: block;
     background-color: $white;
-    // background: linear-gradient(179.67deg, #F3F4F6 13.59%, #F3F4F6 18.57%, #116ACC 143.31%);
-    // animation: background 6s infinite alternate;
     border-radius: 7px;
   }
 
@@ -193,8 +187,6 @@
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
     border-radius: 9px;
     background-color: $white;
-    // background: linear-gradient(179.67deg, #F3F4F6 13.59%, #F3F4F6 18.57%, #116ACC 143.31%);
-    // animation: background 6s infinite alternate;
     padding: 22px;
     @media(max-width: 1200px) {
       max-width: none;
@@ -225,15 +217,128 @@
 
 }
 
+.bil-deteil-loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  background: linear-gradient(119.67deg, #F3F4F6 1%, #F3F4F6 18.57%, #116ACC 500%);
+  animation: background 2s infinite alternate;
 
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 115px;
+  }
 
+  &__top-left,
+  &__top-right,
+  &__top-left::before,
+  &__top-right::before {
+    display: block;
+    border-radius: 7px;
+    background-color: $white;
+  }
 
+  &__top-left {
+    position: relative;
+    width: 250px;
+    height: 30px;
+  }
 
+  &__top-right {
+    position: relative;
+    width: 200px;
+    height: 35px;
+  }
 
+  &__top-left::before,
+  &__top-right::before {
+    content: "";
+    width: 500px;
+    height: 30px;
+    position: absolute;
+    bottom: -65px;
+  }
+
+  &__top-right::before {
+    width: 200px;
+  }
+
+  &__main {
+    display: grid;
+    grid-template-columns: autofit(minmax(200px, 1fr));
+    gap: 30px;
+  }
+
+  &__main-1,
+  &__main-2,
+  &__main-3 {
+    display: block;
+    border-radius: 7px;
+    width: 300px;
+    height: 100px;
+    background-color: $white;
+  }
+
+  &__main-1 {
+    width: 600px;
+    height: 300px;
+  }
+
+  &__main-2 {
+    width: 650px;
+    height: 300px;
+  }
+
+  &__main-3 {
+    width: 100%;
+    height: 400px;
+  }
+
+  @media(max-width: 996px) {
+    &__top-right {
+      display: none;
+    }
+
+    &__top-left::before {
+      width: 290px;
+    }
+
+    &__main-1,
+    &__main-2,
+    &__main-3 {
+      width: 100%;
+    }
+  }
+}
+
+.bil-history  {
+  .bil-deteil-loader__main {
+    display: block;
+  }
+
+  .bil-deteil-loader__main-1,
+  .bil-deteil-loader__main-2,
+  .bil-deteil-loader__main-3 {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 30px;
+  }
+}
 
 
 @keyframes background {
   100% {
     background-position: -100px 1000px;
   }
+}
+
+
+@keyframes load {
+	from {
+		left: -150px;
+	} to {
+		left: 100%;
+	}
 }

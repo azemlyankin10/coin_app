@@ -1,20 +1,20 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('icon-font/fonts/icomoon.eot?nmf6qq');
-  src:  url('icon-font/fonts/icomoon.eot?nmf6qq#iefix') format('embedded-opentype'),
-    url('icon-font/fonts/icomoon.ttf?nmf6qq') format('truetype'),
-    url('icon-font/fonts/icomoon.woff?nmf6qq') format('woff'),
-    url('icon-font/fonts/icomoon.svg?nmf6qq#icomoon') format('svg');
+  src:  url('src/assets/icon-font/fonts/icomoon.eot?nmf6qq');
+  src:  url('src/assets/icon-font/fonts/icomoon.eot?nmf6qq#iefix') format('embedded-opentype'),
+    url('src/assets/icon-font/fonts/icomoon.ttf?nmf6qq') format('truetype'),
+    url('src/assets/icon-font/fonts/icomoon.woff?nmf6qq') format('woff'),
+    url('src/assets/icon-font/fonts/icomoon.svg?nmf6qq#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
-@import './src/components/base-scss/mixins.scss';
-@import './src/components/base-scss/optimize.scss';
-@import './src/components/base-scss/variables.scss';
-@import './src/components/base-scss/repeat-classes.scss';
-@import './src/components/base-scss/choices-style.scss';
+@import './src/base-scss/mixins.scss';
+@import './src/base-scss/optimize.scss';
+@import './src/base-scss/variables.scss';
+@import './src/base-scss/repeat-classes.scss';
+@import './src/base-scss/choices-style.scss';
 @import './src/components/toast/toast.scss';
 @import './src/components/newTransaction/newTransaction.scss';
 @import './src/components/graph/graph.scss';
@@ -24,6 +24,7 @@
 
 
 @import './src/components/header/header.scss';
-@import './src/components/auth/auth.scss';
-@import './src/components/billsPage/billsPage.scss';
-@import './src/components/billDetailPage/billDetailPage.scss';
+@import './src/components/Pages/auth/auth.scss';
+@import './src/components/Pages/billsPage/billsPage.scss';
+@import './src/components/Pages/billDetailPage/billDetailPage.scss';
+@import './src/components/Pages/billHistoryPage/billHistoryPage.scss';
