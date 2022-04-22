@@ -7,18 +7,18 @@ export default class Header {
   }
 
   createNavigation() {
-    let burger
+    const burger = el('button', {type: 'button', class: 'nav__burger burger-menu'}, [
+      el('span', {class: 'burger-menu__line'}, ''),
+      el('span', {class: 'burger-menu__line'}, ''),
+      el('span', {class: 'burger-menu__line'}, '')
+    ])
     const navigation = el('nav', {class: 'header__nav nav'}, [
-      burger = el('button', {type: 'button', class: 'nav__burger burger-menu'}, [
-        el('span', {class: 'burger-menu__line'}, ''),
-        el('span', {class: 'burger-menu__line'}, ''),
-        el('span', {class: 'burger-menu__line'}, '')
-      ]),
+      burger,
       el('div', {class: 'nav__btn-group'}, [
-        el('a', {class: 'btn nav__btn btn--outline'}, 'Банкоматы'),
+        el('a', {class: `btn nav__btn btn--outline ${location.pathname === '/atm' ? 'active' : ''}`}, 'Банкоматы'),
         el('a', {href: '/bills', class: `btn nav__btn btn--outline ${location.pathname === '/bills' ? 'active' : ''}`}, 'Счета'),
-        el('a', {class: 'btn nav__btn btn--outline'}, 'Валюта'),
-        el('a', {href: '/auth', 'data-navigo': '', class: 'btn nav__btn btn--outline'}, 'Выйти'),
+        el('a', {href: '/currency', class: `btn nav__btn btn--outline ${location.pathname === '/currency' ? 'active' : ''}`}, 'Валюта'),
+        el('a', {href: '/auth', class: 'btn nav__btn btn--outline'}, 'Выйти'),
       ])]
     )
 

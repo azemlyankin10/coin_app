@@ -1,15 +1,16 @@
 import Choices from "choices.js";
 import { el, mount, setChildren } from "redom";
 import { router } from "../../../..";
-import BaseComponent from "../../BaseComponent";
+import { createNewBill, getData } from "../../Api";
+import { getCorrectDate } from "../../commonFunctions";
 import popup from "../../popup/popup";
 import toast from "../../toast/toast";
 
 const LINK_FOR_DETAIL_PAGE = '/detail'
 
-export default class BillsPage extends BaseComponent {
-  constructor() {
-    super()
+export default class BillsPage {
+  constructor(apiKey) {
+    this.apiKey = apiKey
   }
 
   card(number, sum, lastTransaction) {
@@ -32,7 +33,7 @@ export default class BillsPage extends BaseComponent {
     setChildren(container, [
       data.map(el => {
         const { account, balance, transactions } = el
-        const lastTransaction = transactions.length > 0 ? this.getCorrectDate(transactions[0].date) : false
+        const lastTransaction = transactions.length > 0 ? getCorrectDate(transactions[0].date) : false
         return this.card(account, `${balance.toFixed(2)} ₽`, lastTransaction)
       })
     ])
@@ -42,16 +43,13 @@ export default class BillsPage extends BaseComponent {
   }
 
   async render() {
-    if(!this.key) return router.navigate('/auth')
+    if(!this.apiKey) return router.navigate('/auth')
 
-    const data = this.payload.length < 0
-    ? this.payload
-    : await this.getData(this.key)
-            .then(res => {
-              this.payload = res.payload
-              if(res.error) throw TypeError = res.error
-              else return res.payload
-            })
+    const data = await getData(this.apiKey)
+      .then(res => {
+        if(res.error) throw TypeError = res.error
+        else return res.payload
+      })
 
 
     const domSelect = el('select', {class: 'form-bills__select'}, [
@@ -108,7 +106,7 @@ export default class BillsPage extends BaseComponent {
       this.cardsContainer.innerHTML = ''
       sortedData.map(elem => {
         const { account, balance, transactions } = elem
-        const lastTransaction = transactions.length > 0 ? this.getCorrectDate(transactions[0].date) : false
+        const lastTransaction = transactions.length > 0 ? getCorrectDate(transactions[0].date) : false
         return mount(this.cardsContainer, this.card(account, `${balance.toFixed(2)} ₽`, lastTransaction))
       })
 
@@ -116,7 +114,7 @@ export default class BillsPage extends BaseComponent {
 
     createNewbillBtn.addEventListener('click', () => {
       const modal = popup('Подтвердите действие', 'Для создания нового счёта, нажмите "ОК"', () => {
-        this.createNewBill(this.key).then(res => {
+          createNewBill(this.apiKey).then(res => {
           if(res.error) return toast(error, 'error')
           const { account, balance } = res.payload
           mount(this.cardsContainer, this.card(account, `${balance.toFixed(2)} ₽`, false))

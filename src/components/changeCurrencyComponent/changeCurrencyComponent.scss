@@ -1,0 +1,139 @@
+.changeCurrencyComponent {
+  position: relative;
+  background: $white;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
+  padding: 50px;
+
+  &__title {
+    margin-bottom: 25px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: -0.02em;
+    color: $black;
+  }
+
+  &__form {
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+  &__form-left {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-right: 25px;
+    gap: 25px;
+  }
+
+  &__input-container {
+    &:nth-child(1),
+    &:nth-child(2) {
+      flex-basis: 45%;
+    }
+
+    &:nth-child(3) {
+      flex-basis: 100%;
+    }
+    display: flex;
+    align-items: center;
+  }
+
+  &__input-title {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.01em;
+    color: $black;
+    margin-right: 20px;
+  }
+
+  &__input {
+    width: 100%;
+    height: 44px;
+    background: $white;
+    border: 1px solid $gray_5;
+    border-radius: 7px;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    color: $black;
+  }
+
+  &__form-btn {
+    padding-left: 13px;
+    padding-right: 13px;
+    border-radius: 7px;
+    background-color: $primary;
+    border: none;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.01em;
+    color: $white;
+  }
+
+  .just-validate-error-label {
+    position: absolute;
+    bottom: 20px;
+  }
+
+  .choices {
+    width: 100%;
+
+    &__inner {
+      border-color: $gray_5;
+    }
+
+    .choices__list--dropdown .choices__item, .choices__list[aria-expanded] .choices__item {
+      font-size: 13px;
+    }
+
+    &__item--choice {
+      &:first-child {
+        display: block;
+      }
+    }
+
+    &__list--dropdown {
+      min-height: 260px;
+    }
+  }
+
+  @media(max-width: 600px) {
+    padding: 0;
+    box-shadow: none;
+    &__form {
+      flex-wrap: wrap;
+    }
+
+    &__form-left {
+      margin-right: 0;
+      margin-bottom: 25px;
+    }
+
+    &__input-container {
+      flex-basis: 100% !important;
+    }
+
+    &__form-btn {
+      width: 100%;
+      min-height: 55px;
+    }
+
+    &__input-title {
+      min-width: 40px;
+    }
+
+    .just-validate-error-label {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+}

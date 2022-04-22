@@ -1,13 +1,13 @@
 import { el, mount } from "redom";
 import JustValidate from 'just-validate';
-import { router } from "../../../..";
-import BaseComponent from "../../BaseComponent";
+import { router} from "../../../..";
+import { getKey } from "../../Api";
 import toast from "../../toast/toast";
 import Loaders from "../../loaders-skeleton/loaders";
 
 const SESSION_STORAGE = 'coin_key'
 
-export default class Auth extends BaseComponent {
+export default class Auth {
 
   form() {
     const auth = el('div', {class: 'auth'})
@@ -64,23 +64,18 @@ export default class Auth extends BaseComponent {
         loader.authLoader()
         const login = e.target.elements.login.value
         const password = e.target.elements.password.value
-        setTimeout(async () => {  //timeout
-
-          await this.getKey({ login, password })
+        await getKey({ login, password })
           .then(res => {
             const { error, payload } = res
             if(!error && payload) {
-              this.key = payload.token
+              // apiKey = payload.token
               sessionStorage.setItem(SESSION_STORAGE, payload.token)
               router.navigate('/bills')
             } else {
               toast(error, 'error')
             }
           })
-          loader.remove()
-
-
-        }, 1000)
+        loader.remove()
       })
 
     mount(auth, form)

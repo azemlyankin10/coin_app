@@ -1,6 +1,7 @@
 import { el, mount, setChildren } from "redom";
 import { router } from "../../../..";
-import BaseComponent from "../../BaseComponent";
+import { getDetail, transfer } from "../../Api";
+import { getSortBills } from "../../commonFunctions";
 import { balanceGraphComponent } from "../../graph/graph";
 import historyTransactionsComponent from "../../historyTransactions.js/historyTransactions";
 import TansactionComponent, { LOCAL_STORAGE } from "../../newTransaction/newTransaction";
@@ -9,15 +10,15 @@ import toast from "../../toast/toast";
 
 const MONTH = 6
 const transactionComponent = new TansactionComponent()
-export default class BillDetailPage extends BaseComponent {
-  constructor(id) {
-    super()
+export default class BillDetailPage {
+  constructor(apiKey, id) {
+    this.apiKey = apiKey
     this.id = id
   }
 
   async render() {
-    if(!this.key) return router.navigate('/auth')
-    const data = await this.getDetail(this.id, this.key)
+    if(!this.apiKey) return router.navigate('/auth')
+    const data = await getDetail(this.id, this.apiKey)
     if(data.error) toast(data.error, 'error')
 
     const billDetailPage = el('main', {class: 'main bill-detail-page container'})
@@ -45,18 +46,18 @@ export default class BillDetailPage extends BaseComponent {
         'Подтверждение транзанции',
         `Вы действительно хотите перевести ${transactionForm.elements.sum.value} ₽ на счёт № ${transactionForm.elements.bill.value}`,
         async () => {
-        const newData = await this.transfer(
+        const newData = await transfer(
           {
             from: data.payload.account,
             to: transactionForm.elements.bill.value,
             amount: transactionForm.elements.sum.value,
           },
-          this.key)
+          this.apiKey)
         if(newData.error) return toast(newData.error, 'error')
 
         balanceDom.textContent = newData.payload.balance.toFixed(2)
         this.graph.remove()
-        this.graph = balanceGraphComponent(this.getSortBills(newData.payload, MONTH), () => router.navigate(`/history${location.search}`))
+        this.graph = balanceGraphComponent(getSortBills(newData.payload, MONTH), () => router.navigate(`/history${location.search}`))
         mount(billDetailPageMainContent, this.graph)
         this.dashboard.remove()
         this.dashboard = historyTransactionsComponent(newData.payload.account, newData.payload.transactions,true)
@@ -74,7 +75,7 @@ export default class BillDetailPage extends BaseComponent {
       })
     })
 
-    this.graph = balanceGraphComponent(this.getSortBills(data.payload, MONTH), () => router.navigate(`/history${location.search}`))
+    this.graph = balanceGraphComponent(getSortBills(data.payload, MONTH), () => router.navigate(`/history${location.search}`))
     this.dashboard = historyTransactionsComponent(data.payload.account, data.payload.transactions, true)
     const billDetailPageMainContent = el('div', {class: 'bill-detail-page__main-content'}, [transactionForm, this.graph, this.dashboard])
 

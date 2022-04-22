@@ -43,8 +43,6 @@
     width: 100px;
     height: 40px;
     background-color: $white;
-    // background: linear-gradient(179.67deg, #F3F4F6 13.59%, #F3F4F6 18.57%, #116ACC 143.31%);
-    // animation: background 6s infinite alternate;
     border-radius: 7px;
     &:not(:last-child) {
       margin-right: 15px;
@@ -327,6 +325,85 @@
   }
 }
 
+.currency-loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(119.67deg, #F3F4F6 1%, #F3F4F6 18.57%, #116ACC 500%);
+  animation: background 2s infinite alternate;
+  z-index: 9;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 150px;
+    border-radius: 7px;
+    background-color: $white;
+    width: 300px;
+    height: 30px;
+  }
+
+  &__block-1,
+  &__block-2,
+  &__block-3 {
+    margin-top: 100px;
+    display: block;
+    position: absolute;
+    border-radius: 40px;
+    background-color: $white;
+  }
+  &__block-1 {
+    left: 50px;
+    width: 40%;
+    height: 850px;
+  }
+  &__block-2 {
+    right: 50px;
+    width: 50%;
+    height: 1150px;
+  }
+  &__block-3 {
+    top: 1050px;
+    width: 40%;
+    height: 250px;
+  }
+
+  @media(max-width: 1200px) {
+    &__block-1 {
+      height: 650px;
+    }
+    &__block-2 {
+      width: 45%;
+      height: 250px;
+    }
+    &__block-3 {
+      top: 850px;
+      width: 90%;
+      height: 500px;
+    }
+  }
+
+  @media(max-width: 996px) {
+    &__block-1,
+    &__block-2,
+    &__block-3 {
+      width: 100%;
+      position: static;
+      margin-top: 0;
+      margin-bottom: 35px;
+    }
+
+    &__block-1 {
+      margin-top: 150px;
+      height: 300px;
+      width: 100%;
+    }
+
+    &__block-2 {
+      height: 500px;
+    }
+  }
+}
 
 @keyframes background {
   100% {

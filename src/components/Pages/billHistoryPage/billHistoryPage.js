@@ -1,20 +1,21 @@
 import { el, setChildren } from "redom";
-import BaseComponent from "../../BaseComponent";
+import { getDetail } from "../../Api";
+import { getSortBills } from "../../commonFunctions";
 import { balanceGraphComponent, transactionsGraphComponent } from "../../graph/graph";
 import historyTransactionsComponent from "../../historyTransactions.js/historyTransactions";
 import toast from "../../toast/toast";
 
 const MONTH = 11
 
-export default class BillHistoryPage extends BaseComponent {
-  constructor(id) {
-    super()
+export default class BillHistoryPage {
+  constructor(apiKey, id) {
+    this.apiKey = apiKey
     this.id = id
   }
 
   async render() {
-    if(!this.key) return router.navigate('/auth')
-    const data = await this.getDetail(this.id, this.key)
+    if(!this.apiKey) return router.navigate('/auth')
+    const data = await getDetail(this.id, this.apiKey)
     if(data.error) toast(data.error, 'error')
 
     const page = el('main', {class: 'main bill-detail-page container'})
@@ -35,8 +36,8 @@ export default class BillHistoryPage extends BaseComponent {
       ])
     ])
 
-    const graphBalance = balanceGraphComponent(this.getSortBills(data.payload, MONTH))
-    const graphTransactons = transactionsGraphComponent(this.getSortBills(data.payload, MONTH))
+    const graphBalance = balanceGraphComponent(getSortBills(data.payload, MONTH))
+    const graphTransactons = transactionsGraphComponent(getSortBills(data.payload, MONTH))
     const dashboard = historyTransactionsComponent(data.payload.account, data.payload.transactions)
 
     setChildren(page, [header, graphBalance, graphTransactons, dashboard])

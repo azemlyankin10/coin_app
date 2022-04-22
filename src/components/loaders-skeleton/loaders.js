@@ -93,4 +93,18 @@ export default class Loaders {
     return mount(document.querySelector('.app'), loader)
   }
 
+  currencyPageLoader() {
+    document.body.style.overflow = 'hidden'
+    const loader = el('div', {class: 'container currency-loader'}, [
+      this.headerLoader(),
+      el('span', {class: 'currency-loader__block-1'}),
+      el('span', {class: 'currency-loader__block-2'}),
+      el('span', {class: 'currency-loader__block-3'}),
+    ])
+
+    this.loader = loader
+
+    return mount(document.querySelector('.app'), loader)
+  }
+
 }

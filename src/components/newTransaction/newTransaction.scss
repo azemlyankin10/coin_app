@@ -3,7 +3,6 @@
   border-radius: 50px;
   min-width: 606px;
   padding: 25px 50px;
-  // @media(max-width: 1410px) {}
   &__title {
     margin-bottom: 25px;
     font-weight: 700;
@@ -63,10 +62,6 @@
       right: 23px;
       border: 7px solid transparent; border-top: 7px solid $black;
     }
-  }
-
-  &__input-dropdown-item {
-    // margin-bottom: 10px;
   }
 
   &__input {

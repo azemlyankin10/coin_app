@@ -1,15 +1,9 @@
-import { el, mount, setChildren } from "redom"
+import { el, setChildren } from "redom"
 import JustValidate from 'just-validate';
-import BaseComponent from "../BaseComponent";
-import popup from "../popup/popup";
 
 export const LOCAL_STORAGE = 'coin_bills_transfers'
 
-export default class TansactionComponent extends BaseComponent {
-  constructor() {
-    super()
-    // this.fromBill = from
-  }
+export default class TansactionComponent {
 
   updeteDropdown() {
     this.dropdown.innerHTML = ''
