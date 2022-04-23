@@ -405,6 +405,43 @@
   }
 }
 
+.map-loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(119.67deg, #F3F4F6 1%, #F3F4F6 18.57%, #116ACC 500%);
+  animation: background 2s infinite alternate;
+  z-index: 9;
+
+  &__block-1,
+  &__block-2 {
+    display: block;
+    border-radius: 7px;
+    background-color: $white;
+  }
+
+  &__block-1 {
+    width: 300px;
+    height: 30px;
+    margin-bottom: 50px;
+  }
+
+  &__block-2 {
+    width: 100%;
+    height: 1000px;
+  }
+
+  @media(max-width: 600px) {
+    &__block-1 {
+      width: 250px;
+    }
+
+    &__block-2 {
+      height: 500px;
+    }
+  }
+}
+
 @keyframes background {
   100% {
     background-position: -100px 1000px;

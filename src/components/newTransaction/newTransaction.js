@@ -1,5 +1,9 @@
-import { el, setChildren } from "redom"
+import { el, mount, setChildren } from "redom"
 import JustValidate from 'just-validate';
+import { identityPaySystem } from "../commonFunctions";
+import visa from '../../assets/img/visa.png'
+import ms from '../../assets/img/mastercard_payment_method_icon_142750.png'
+import americanExp from '../../assets/img/american-express.png'
 
 export const LOCAL_STORAGE = 'coin_bills_transfers'
 
@@ -66,14 +70,13 @@ export default class TansactionComponent {
     window.addEventListener('click', e => {
       if(e.target !== this.dropdown && e.target !== inputNumber) return formNumberContainer.classList.remove('active')
     })
-
-
-
+    const iconContainer = el('div', {class: 'form-transaction__icon-container'})
     const formNumberContainer = el('div', {class: 'form-transaction__input-container', id: 'dropbox-container'}, [
       el('label', {class: 'form__label form-transaction__label'}, 'Номер счёта получателя'),
       el('div', {class: 'form-transaction__input-dropdown-container '}, [
         inputNumber,
-        this.createDropdown()
+        this.createDropdown(),
+        iconContainer
       ])
     ])
     this.formNumberContainer = formNumberContainer
@@ -90,6 +93,37 @@ export default class TansactionComponent {
       formTotalContainer,
       btn
     ])
+
+
+
+    inputNumber.addEventListener('input', (e) => {
+      let paySystem = identityPaySystem(e.target.value)
+      let icon
+      switch (paySystem) {
+        case 'Visa':
+          icon = visa
+          break;
+        case 'MasterCard':
+          icon = ms
+          break
+        case 'AmericanExpress':
+          icon = americanExp
+          break
+      }
+      if(icon) {
+        if(!this.icon) {
+          const img = el('img', {src: icon, class: 'form-transaction__icon-img'})
+          this.icon = img
+          mount(iconContainer, img)
+        } else {
+          this.icon.src = icon
+        }
+        this.icon.style.opacity = 1
+      } else {
+        if(!this.icon) return
+        this.icon.style.opacity = 0
+      }
+    })
 
     const validation = new JustValidate(form)
     validation
@@ -130,6 +164,7 @@ export default class TansactionComponent {
         },
       ])
       .onSuccess(callback)
+
 
 
     return form

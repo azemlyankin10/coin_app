@@ -92,4 +92,7 @@ module.exports = {
     open: true,
     compress: true,
   },
+  performance: {
+    hints: false
+  }
 }

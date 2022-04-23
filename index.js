@@ -9,11 +9,11 @@ import BillDetailPage from './src/components/Pages/billDetailPage/billDetailPage
 import Loaders from './src/components/loaders-skeleton/loaders';
 import BillHistoryPage from './src/components/Pages/billHistoryPage/billHistoryPage';
 import CurrencyPage from './src/components/Pages/currencyPage/currencyPage';
+import mapPage from './src/components/Pages/mapPage/mapPage';
 
 export const URL = 'http://localhost:3000'
 export const SOKET_URL = 'ws://localhost:3000'
 
-console.log(apiKey);
 const app = document.querySelector('.app')
 const loader = new Loaders()
 let apiKey
@@ -62,6 +62,14 @@ router
     loader.currencyPageLoader()
     mount(app, new Header(true).createHeader())
     mount(app, await new CurrencyPage(apiKey).render())
+    setTimeout(() => loader.remove(), 1000)
+  })
+  .on('/atm', async () => {
+    document.title = 'COIN-Map'
+    app.innerHTML = ''
+    loader.mapPageLoader()
+    mount(app, new Header(true).createHeader())
+    mount(app, await mapPage())
     setTimeout(() => loader.remove(), 1000)
   })
   .resolve();

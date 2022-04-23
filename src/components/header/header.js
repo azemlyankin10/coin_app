@@ -12,17 +12,16 @@ export default class Header {
       el('span', {class: 'burger-menu__line'}, ''),
       el('span', {class: 'burger-menu__line'}, '')
     ])
-    const navigation = el('nav', {class: 'header__nav nav'}, [
-      burger,
-      el('div', {class: 'nav__btn-group'}, [
-        el('a', {class: `btn nav__btn btn--outline ${location.pathname === '/atm' ? 'active' : ''}`}, 'Банкоматы'),
-        el('a', {href: '/bills', class: `btn nav__btn btn--outline ${location.pathname === '/bills' ? 'active' : ''}`}, 'Счета'),
-        el('a', {href: '/currency', class: `btn nav__btn btn--outline ${location.pathname === '/currency' ? 'active' : ''}`}, 'Валюта'),
-        el('a', {href: '/auth', class: 'btn nav__btn btn--outline'}, 'Выйти'),
-      ])]
-    )
+    const navBtns = el('div', {class: 'nav__btn-group'}, [
+      el('a', {href: '/atm', class: `btn nav__btn btn--outline ${location.pathname === '/atm' ? 'active' : ''}`}, 'Банкоматы'),
+      el('a', {href: '/bills', class: `btn nav__btn btn--outline ${location.pathname === '/bills' ? 'active' : ''}`}, 'Счета'),
+      el('a', {href: '/currency', class: `btn nav__btn btn--outline ${location.pathname === '/currency' ? 'active' : ''}`}, 'Валюта'),
+      el('a', {href: '/auth', class: 'btn nav__btn btn--outline'}, 'Выйти'),
+    ])
+    const navigation = el('nav', {class: 'header__nav nav'}, [burger, navBtns])
 
     burger.addEventListener('click', () => burger.classList.toggle('active'))
+
     return navigation
   }
 

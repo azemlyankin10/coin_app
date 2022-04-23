@@ -4,6 +4,7 @@ import { getSortBills } from "../../commonFunctions";
 import { balanceGraphComponent, transactionsGraphComponent } from "../../graph/graph";
 import historyTransactionsComponent from "../../historyTransactions.js/historyTransactions";
 import toast from "../../toast/toast";
+import Sortable from 'sortablejs'
 
 const MONTH = 11
 
@@ -18,7 +19,7 @@ export default class BillHistoryPage {
     const data = await getDetail(this.id, this.apiKey)
     if(data.error) toast(data.error, 'error')
 
-    const page = el('main', {class: 'main bill-detail-page container'})
+    const page = el('main', {class: 'main bill-history-page bill-detail-page container'})
     const header = el('div', {class: 'bill-detail-page__head'}, [
       el('div', {class: 'bill-detail-page__head-left'}, [
         el('h1', {class: 'bill-detail-page__title title'}, 'История баланса'),
@@ -41,6 +42,8 @@ export default class BillHistoryPage {
     const dashboard = historyTransactionsComponent(data.payload.account, data.payload.transactions)
 
     setChildren(page, [header, graphBalance, graphTransactons, dashboard])
+
+    new Sortable(page)
 
     return page
   }

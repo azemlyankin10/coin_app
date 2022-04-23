@@ -7,6 +7,7 @@ import historyTransactionsComponent from "../../historyTransactions.js/historyTr
 import TansactionComponent, { LOCAL_STORAGE } from "../../newTransaction/newTransaction";
 import popup from "../../popup/popup";
 import toast from "../../toast/toast";
+import Sortable from 'sortablejs'
 
 const MONTH = 6
 const transactionComponent = new TansactionComponent()
@@ -19,8 +20,8 @@ export default class BillDetailPage {
   async render() {
     if(!this.apiKey) return router.navigate('/auth')
     const data = await getDetail(this.id, this.apiKey)
+    console.log(data);
     if(data.error) toast(data.error, 'error')
-
     const billDetailPage = el('main', {class: 'main bill-detail-page container'})
     const headBtn = el('a', {href: '/bills', 'data-navigo': '', class: 'bill-detail-page__btn btn btn--normal'}, [
       el('span', {class: 'bill-detail-page__btn-icon'}),
@@ -77,12 +78,15 @@ export default class BillDetailPage {
 
     this.graph = balanceGraphComponent(getSortBills(data.payload, MONTH), () => router.navigate(`/history${location.search}`))
     this.dashboard = historyTransactionsComponent(data.payload.account, data.payload.transactions, true)
-    const billDetailPageMainContent = el('div', {class: 'bill-detail-page__main-content'}, [transactionForm, this.graph, this.dashboard])
+    const billDetailPageMainContent = el('div', {id: 'bills-content', class: 'bill-detail-page__main-content'}, [transactionForm, this.graph, this.dashboard])
+
+    new Sortable(billDetailPageMainContent)
 
     setChildren(billDetailPage, [
       billDetailPageHeader,
       billDetailPageMainContent
     ])
+
     return billDetailPage
   }
 }

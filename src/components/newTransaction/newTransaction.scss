@@ -26,6 +26,17 @@
     }
   }
 
+  &__icon-container {
+    position: absolute;
+    right: -40px;
+    top: 3px;
+  }
+
+  &__icon-img {
+    width: 35px;
+    height: 35px;
+  }
+
   &__input-dropdown-list {
     position: absolute;
     top: 105%;
@@ -149,6 +160,11 @@
     &__input-dropdown-button {
       font-size: 12px;
       line-height: 16px;
+    }
+
+    &__icon-container {
+      right: 0;
+      top: -40px;
     }
   }
 }

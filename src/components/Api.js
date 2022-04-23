@@ -69,3 +69,9 @@ export const getCurrencyNames = () => {
   return fetch(`${URL}/all-currencies`)
     .then(res => res.json())
 }
+
+export const getBanks = () => {
+  return fetch(`${URL}/banks`)
+    .then(res => res.json())
+}
+

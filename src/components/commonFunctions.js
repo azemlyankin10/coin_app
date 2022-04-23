@@ -1,3 +1,4 @@
+
 export const getCorrectDate = date => {
   const monthName = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
   date = new Date(date)
@@ -9,7 +10,7 @@ export const getCorrectDate = date => {
 
 export const getSortBills = (data, countMonth) => {
   const transactionsArray = data.transactions
-  //получает массив транзакций за countMonth мес.
+  //получаем массив транзакций за countMonth мес.
   const step1 = transactionsArray.filter(el => {
     const ms = new Date() - 86400000 * 30 * countMonth
     const date = new Date(ms).setDate(1)
@@ -78,6 +79,18 @@ export const getSortBills = (data, countMonth) => {
     return months[index]
   })
 
-
   return {comeSum, outSum, currentSum, currentMonths}
+}
+
+export const identityPaySystem = (num) => {
+  let paySystem
+  if(num.startsWith('4'))
+    paySystem = 'Visa'
+  if(num.startsWith('51') || num.startsWith('52') || num.startsWith('53') || num.startsWith('54') || num.startsWith('55'))
+    paySystem = 'MasterCard'
+  if(num.startsWith('3'))
+    paySystem = 'AmericanExpress'
+  if(num.length > 16)
+    paySystem = ''
+  return paySystem
 }

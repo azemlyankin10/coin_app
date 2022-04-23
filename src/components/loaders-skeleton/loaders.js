@@ -107,4 +107,17 @@ export default class Loaders {
     return mount(document.querySelector('.app'), loader)
   }
 
+  mapPageLoader() {
+    document.body.style.overflow = 'hidden'
+    const loader = el('div', {class: 'container map-loader'}, [
+      this.headerLoader(),
+      el('span', {class: 'map-loader__block-1'}),
+      el('span', {class: 'map-loader__block-2'})
+    ])
+
+    this.loader = loader
+
+    return mount(document.querySelector('.app'), loader)
+  }
+
 }
