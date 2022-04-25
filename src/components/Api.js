@@ -50,6 +50,7 @@ export const changeCurrency = (objData, key) => {
 }
 
 // GET
+
 export const getData = key => {
   return fetch(`${URL}/accounts`, {headers: {Authorization: `Basic ${key}`}})
     .then(res => res.json())
@@ -65,13 +66,25 @@ export const getMyCurrency = key => {
     .then(res => res.json())
 }
 
-export const getCurrencyNames = () => {
-  return fetch(`${URL}/all-currencies`)
-    .then(res => res.json())
+export const getCurrencyNames = async () => {
+  if(sessionStorage.getItem(`${URL}/all-currencies`)) {
+    console.log('Названия валют загружено с кэша')
+    return JSON.parse(sessionStorage.getItem(`${URL}/all-currencies`))
+  }
+  const res = await fetch(`${URL}/all-currencies`)
+  const data = await res.json()
+  sessionStorage.setItem(`${URL}/all-currencies`, JSON.stringify(data))
+  return await data
 }
 
-export const getBanks = () => {
-  return fetch(`${URL}/banks`)
-    .then(res => res.json())
+export const getBanks = async () => {
+  if(sessionStorage.getItem(`${URL}/banks`)) {
+    console.log('Коородинаты загружено с кэша')
+    return JSON.parse(sessionStorage.getItem(`${URL}/banks`))
+  }
+  const res = await fetch(`${URL}/banks`)
+  const data = await res.json()
+  sessionStorage.setItem(`${URL}/banks`, JSON.stringify(data))
+  return await data
 }
 

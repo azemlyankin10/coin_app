@@ -94,3 +94,4 @@ export const identityPaySystem = (num) => {
     paySystem = ''
   return paySystem
 }
+

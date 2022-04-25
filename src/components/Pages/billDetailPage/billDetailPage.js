@@ -20,7 +20,6 @@ export default class BillDetailPage {
   async render() {
     if(!this.apiKey) return router.navigate('/auth')
     const data = await getDetail(this.id, this.apiKey)
-    console.log(data);
     if(data.error) toast(data.error, 'error')
     const billDetailPage = el('main', {class: 'main bill-detail-page container'})
     const headBtn = el('a', {href: '/bills', 'data-navigo': '', class: 'bill-detail-page__btn btn btn--normal'}, [
